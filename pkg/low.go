@@ -38,7 +38,7 @@ func Lowercase(text string) string {
 // 	if len(text) == 0 {
 // 		return text
 // 	}
-	
+
 // 	regex := `(\w+)\s*\(low\)`
 // 	re := regexp.MustCompile(regex)
 

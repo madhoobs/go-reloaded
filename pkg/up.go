@@ -38,7 +38,7 @@ func Uppercase(text string) string {
 // 	if len(text) == 0 {
 // 		return text
 // 	}
-	
+
 // 	regex := `(\w+)\s*\(up\)`
 // 	re := regexp.MustCompile(regex)
 
