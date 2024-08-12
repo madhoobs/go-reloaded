@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(refine.BinToDecimal("It has been 10 (bin) years"))
+	fmt.Println(refine.Lowercase("I should stop SHOUTING (low)"))
 }
