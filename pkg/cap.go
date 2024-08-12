@@ -1,11 +1,38 @@
 package refine
 
 import (
-	// "fmt"
-	// "regexp"
 	"strconv"
 	"strings"
+	// "regexp"
 )
+
+func Capitalize(text string) string {
+	words := strings.Split(string(text), " ")
+
+	for i := 0; i < len(words); i++ {
+		if words[i] == "(cap)" {
+			words[i-1] = strings.ToUpper(words[i-1][:1]) + words[i-1][1:]
+			words = append(words[:i], words[i+1:]...)
+			i-- // neglect the (cap)
+		}
+
+		// capitalize with num
+		if words[i] == "(cap," {
+			b := strings.Trim(string(words[i+1]), words[i+1][1:])
+			number, _ := strconv.Atoi(string(b))
+			if number >= len(words[i]) {
+				number = len(words[i])
+			}
+			for j := 1; j <= number; j++ {
+				words[i-j] = strings.ToUpper(words[i-j][:1]) + words[i-j][1:]
+			}
+			words = append(words[:i], words[i+2:]...)
+			i-- // neglect the (cap, <number>)
+		}
+	}
+
+	return strings.Join(words, " ")
+}
 
 // func Capitalize(text string) string {
 // 	if len(text) == 0 {
@@ -102,47 +129,3 @@ import (
 
 // 	return capWords
 // }
-
-func Capitalize(text string) string {
-	words := strings.Split(string(text), " ")
-	// for i, word := range words {
-	// if word == "(cap)" {
-	// 			words[i-1] = strings.ToUpper(words[i-1][:1])+words[i-1][1:]
-	// 			words = append(words[:i], words[i+1:]...)
-	// 		}
-
-	// 			// capitalize with num
-	// 		 if word == "(cap," {
-	// 			b := strings.Trim(string(words[i+1]), words[i+1][1:])
-	// 			number, _ := strconv.Atoi(string(b))
-	// 			for j := 1; j <= number; j++ {
-	// 				words[i-j] = strings.ToUpper(words[i-j][:1])+words[i-j][1:]
-	// 			}
-	// 			words = append(words[:i], words[i+2:]...)
-	// 		}
-	// 	}
-
-	for i := 0; i < len(words); i++ {
-		if words[i] == "(cap)" {
-			words[i-1] = strings.ToUpper(words[i-1][:1]) + words[i-1][1:]
-			words = append(words[:i], words[i+1:]...)
-			i-- // neglect the (cap)
-		}
-
-		// capitalize with num
-		if words[i] == "(cap," {
-			b := strings.Trim(string(words[i+1]), words[i+1][1:])
-			number, _ := strconv.Atoi(string(b))
-			if number >= len(words[i]) {
-				number = len(words[i])
-			}
-			for j := 1; j <= number; j++ {
-				words[i-j] = strings.ToUpper(words[i-j][:1]) + words[i-j][1:]
-			}
-			words = append(words[:i], words[i+2:]...)
-			i-- // neglect the (cap, <number>)
-		}
-	}
-
-	return strings.Join(words, " ")
-}
