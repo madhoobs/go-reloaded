@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(refine.Uppercase("Ready, set, go (up, 2) !"))
+	fmt.Println(refine.Lowercase("I Should (low) stop SHOUTING (low)"))
 }
