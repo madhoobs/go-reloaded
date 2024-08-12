@@ -7,5 +7,5 @@ import (
 )
 
 func main() {
-	fmt.Println(refine.Capitalize("Welcome to the Brooklyn bridge (cap)"))
+	fmt.Println(refine.Capitalize("welcome to the brooklyn bridge (cap, 4)"))
 }
