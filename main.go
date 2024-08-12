@@ -3,9 +3,18 @@ package main
 import (
 	refine "go-reloaded/pkg"
 
-	"fmt"
+	"os"
 )
 
 func main() {
-	fmt.Println(refine.Lowercase("I Should (low) stop SHOUTING (low)"))
+	args := os.Args[1:]
+
+	text, _ := os.ReadFile(args[0])
+	
+	refined := refine.AllChecks(string(text))
+
+	handle := os.WriteFile(args[1], []byte(refined), 0644)
+	if handle != nil {
+		panic(handle)
+	}
 }
